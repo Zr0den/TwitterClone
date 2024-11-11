@@ -30,13 +30,9 @@ namespace UserService
             return await _userRepository.GetByIdAsync(id);
         }
 
-        public async Task<List<User>> GetUserByNameAsync(string email)
+        public async Task<List<User>> SearchAsync(string query)
         {
-            return await _userRepository.GetByNameAsync(email);
-        }
-        public async Task<List<User>> GetUserByUserTagAsync(string email)
-        {
-            return await _userRepository.GetByUserTagAsync(email);
+            return await _userRepository.SearchAsync(query);
         }
 
         public async Task AddUserAsync(User user)
