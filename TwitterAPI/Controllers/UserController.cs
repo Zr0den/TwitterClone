@@ -13,7 +13,7 @@ namespace TwitterAPI.Controllers
     {
         private readonly UserService _userService;
 
-        public UserController(UserProfileService.UserService userService)
+        public UserController(UserService userService)
         {
             _userService = userService;
         }
@@ -72,6 +72,22 @@ namespace TwitterAPI.Controllers
                 Username = user.UserTag,
                 Email = user.Email
             };
+
+            return Ok(result);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<UserProfileDto>>> SearchUsers(string query)
+        {
+            var users = await _userService.SearchAsync(query);
+
+            var result = users.Select(user => new UserProfileDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Username = user.UserTag,
+                Email = user.Email
+            }).ToList();
 
             return Ok(result);
         }
