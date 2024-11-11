@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Database.Entities;
+using System.Data.Entity;
 
 namespace Database.Repositories
 {
@@ -12,9 +13,14 @@ namespace Database.Repositories
             _context = context;
         }
 
-        public async Task<User> GetByEmailAsync(string email)
+        public async Task<List<User>> GetByNameAsync(string name)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return await _context.Users.Where(x => x.Name == name).ToListAsync();
+        }
+
+        public async Task<List<User>> GetByUserTagAsync(string name)
+        {
+            return await _context.Users.Where(x => x.UserTag == name).ToListAsync();
         }
     }
 }

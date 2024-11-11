@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Database;
+using Database.Repositories;
 
 class Program
 {
@@ -33,5 +34,8 @@ class Program
         // Add DbContext with connection string from configuration
         services.AddDbContext<Database.Context>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
 }

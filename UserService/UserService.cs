@@ -1,4 +1,6 @@
 ﻿using Database;
+using Database.Entities;
+using Database.Repositories;
 using Helpers;
 using System;
 using System.Collections.Generic;
@@ -11,14 +13,45 @@ namespace UserService
 {
     public class UserService
     {
+        private readonly IUserRepository _userRepository;
 
-        public UserService() { }
-
-        public static async void CreateUser(UserDto user)
+        public UserService(IUserRepository userRepository)
         {
-            //UserDto dto = new UserDto { Id = user.Id, Name = user.Name, UserTag = user.UserTag, Email = user.Email, Password = user.Password };
+            _userRepository = userRepository;
+        }
 
-            await Database.Database.CreateUser(user);
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            return await _userRepository.GetAllAsync();
+        }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _userRepository.GetByIdAsync(id);
+        }
+
+        public async Task<List<User>> GetUserByNameAsync(string email)
+        {
+            return await _userRepository.GetByNameAsync(email);
+        }
+        public async Task<List<User>> GetUserByUserTagAsync(string email)
+        {
+            return await _userRepository.GetByUserTagAsync(email);
+        }
+
+        public async Task AddUserAsync(User user)
+        {
+            await _userRepository.AddAsync(user);
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            await _userRepository.UpdateAsync(user);
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            await _userRepository.DeleteAsync(id);
         }
     }
 }
