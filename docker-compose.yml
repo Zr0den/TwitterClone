@@ -1,0 +1,19 @@
+services:
+  twitterapi:
+    image: ${DOCKER_REGISTRY-}twitterapi
+    build:
+      context: .
+      dockerfile: TwitterAPI/Dockerfile
+  mssql:
+     image: mcr.microsoft.com/mssql/server:2022-latest
+    # image: mcr.microsoft.com/azure-sql-edge:latestdoc
+     ports:
+      - 1433:1433
+     environment:
+       MSSQL_SA_PASSWORD: "S3cr3tP4sSw0rd#123"
+       ACCEPT_EULA: "Y"
+     volumes:             
+      - database-data:/var/opt/mssql
+
+volumes:
+ database-data:  

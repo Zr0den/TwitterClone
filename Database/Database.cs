@@ -1,5 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Helpers;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text;
 
 namespace Database
 {
@@ -23,7 +26,7 @@ namespace Database
                 SqlCommand command = new SqlCommand(cs, sqlConnection);
                 command.ExecuteNonQuery();
 
-                cs = "IF OBJECT_ID(N'dbo.User', N'U') IS NULL BEGIN   CREATE TABLE dbo.User (Id INT IDENTITY(1,1), Name varchar(100) not null, UserTag varchar(100) not null, Password varchar(100) not null, Email varchar(100), CreatedTimestamp DateTime not null); END;";
+                cs = "IF OBJECT_ID(N'dbo.User', N'U') IS NULL BEGIN   CREATE TABLE dbo.User (Id INT IDENTITY(1,1), Name varchar(100) not null, UserTag varchar(100) not null, Password varchar(100) not null, Email varchar(100); END;";
                 command = new SqlCommand(cs, sqlConnection);
                 command.ExecuteNonQuery();
 
@@ -40,6 +43,19 @@ namespace Database
             {
                 throw new ApplicationException("Error SetupDatabase: " + ex.Message);
             }
+        }
+
+        public static async Task CreateUser(UserDto dto)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+
+            StringBuilder sb = new StringBuilder($"INSERT INTO dbo.User (Name, Usertag, Password, Email) VALUES ('{dto.Name})', '{dto.UserTag}', '{dto.Email}', '{dto.Password}';");
+
+            SqlCommand command = new SqlCommand(sb.ToString(), sqlConnection);
+            await command.ExecuteNonQueryAsync();
+
+            sqlConnection.Close();
         }
     }
 }
