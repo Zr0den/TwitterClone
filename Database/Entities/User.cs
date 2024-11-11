@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService.Entities
+namespace EF.Entities
 {
     public class User
     {
