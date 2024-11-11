@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserService
+namespace UserProfileService
 {
     public class UserService
     {
