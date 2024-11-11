@@ -30,7 +30,7 @@ namespace UserService
             return await _userRepository.GetByIdAsync(id);
         }
 
-        public async Task<List<User>> SearchAsync(string query)
+        public async Task<IEnumerable<User>> SearchAsync(string query)
         {
             return await _userRepository.SearchAsync(query);
         }
