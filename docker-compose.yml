@@ -1,12 +1,21 @@
 services:
+  tweetservice:
+    image: ${DOCKER_REGISTRY-}tweetservice
+    build:
+      context: .
+      dockerfile: TweetService/Dockerfile
+  userservice:
+    image: ${DOCKER_REGISTRY-}userservice
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
   twitterapi:
-    image: ${DOCKER_REGISTRY-}twitterapi
+    image: ${DOCKER_REGISTRY-}userapi
     build:
       context: .
       dockerfile: TwitterAPI/Dockerfile
   mssql:
      image: mcr.microsoft.com/mssql/server:2022-latest
-    # image: mcr.microsoft.com/azure-sql-edge:latestdoc
      ports:
       - 1433:1433
      environment:

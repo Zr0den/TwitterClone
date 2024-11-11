@@ -1,9 +1,9 @@
-﻿using EF.Entities;
+﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-namespace EF
+namespace Database
 {
     public class Context : DbContext
     {

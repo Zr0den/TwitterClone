@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EF.Entities
+namespace Database.Entities
 {
     public class Tweet
     {
