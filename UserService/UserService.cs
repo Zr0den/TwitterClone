@@ -36,16 +36,6 @@ namespace UserProfileService
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
-        {
-            return await _userRepository.GetByIdAsync(id);
-        }
-
-        public async Task<IEnumerable<User>> SearchAsync(string query)
-        {
-            return await _userRepository.SearchAsync(query);
-        }
-
         public void AddUserAsync(UserCreateDto userDto)
         {
             var user = new User
