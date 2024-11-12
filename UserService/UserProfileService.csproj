@@ -33,6 +33,7 @@
     <ProjectReference Include="..\..\MessageClient\MessageClient.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\MessageClient\MessageClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
