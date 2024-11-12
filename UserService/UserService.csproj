@@ -30,12 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MessageClient\MessageClient.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Entities\" />
+    <Folder Include="Core\" />
   </ItemGroup>
 
 </Project>
